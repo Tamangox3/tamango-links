@@ -1,0 +1,13 @@
+---
+export async function getStaticPaths() {
+  const pages = ["/"];
+
+  return pages.map((page) => {
+    return {
+      params: { slug: page == "/" ? undefined : page },
+    };
+  });
+}
+---
+
+<h>Hello world</h>
