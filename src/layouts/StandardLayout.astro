@@ -1,0 +1,21 @@
+---
+import type { TypePageSkeleton } from "@lib/generated/contentful";
+import type { Entry } from "@lib/types";
+import Base from "./Base.astro";
+import RichText from "@components/RichText.astro";
+
+interface Props extends Entry<TypePageSkeleton> {}
+
+const page = Astro.props;
+---
+
+<Base {...page}>
+  <img
+    src="/logo.svg"
+    alt="logo"
+    class="w-full max-w-[165px] md:max-w-[320px] mx-auto mt-12 mb-12"
+  />
+  <div class="container overflow-x-hidden text-center mx-auto px-4">
+    <RichText content={page.fields.content} />
+  </div>
+</Base>

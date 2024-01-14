@@ -1,0 +1,24 @@
+---
+import "@styles/main.scss";
+import type { TypePageSkeleton } from "@lib/generated/contentful";
+import type { Entry } from "@lib/types";
+import Head from "@components/Head.astro";
+import IntroAnimation from "@components/IntroAnimation.astro";
+import Grain from "@components/Grain.astro";
+
+interface Props extends Entry<TypePageSkeleton> {}
+
+const page = Astro.props;
+---
+
+<html lang="it">
+  <Head {...page} />
+  <body class="bg-black text-white">
+    <Grain />
+    <IntroAnimation />
+    <main>
+      <slot />
+      <!-- this is where the page content will be rendered -->
+    </main>
+  </body>
+</html>

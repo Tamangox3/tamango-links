@@ -1,0 +1,19 @@
+@use 'sass:math';
+
+
+.intro-animation {
+  img {
+    display: none;
+    width: 150px;
+  }
+  .intro-animation-frame-show {
+    display: block;
+  }
+}
+
+.intro-animation-fade-out {
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+}
+
+

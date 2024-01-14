@@ -1,23 +1,36 @@
 ---
-export async function getStaticPaths() {
-  const pages = ["/"];
+import contentful from "@lib/contentful";
+import { type TypePageSkeleton } from "@lib/generated/contentful/index";
+import type { Entry } from "@lib/types";
+import StandardLayout from "src/layouts/StandardLayout.astro";
 
-  return pages.map((page) => {
+export async function getStaticPaths() {
+  const pages = await contentful.getEntries<TypePageSkeleton>({
+    content_type: "page",
+    include: 10, // max include depth
+  });
+
+  return pages.items.map((page) => {
     return {
-      params: { slug: page == "/" ? undefined : page },
+      params: { slug: page.fields.slug == "/" ? undefined : page.fields.slug },
+      props: {
+        page: page,
+      },
     };
   });
 }
+
+const getLayout = (page: Entry<TypePageSkeleton>) => {
+  switch (page.fields.layout) {
+    case "Standard":
+      return StandardLayout;
+    default:
+      return StandardLayout;
+  }
+};
+
+const { page } = Astro.props;
+const Layout = getLayout(page);
 ---
 
-<div class="container max-w-3xl mx-auto p-4">
-  <img src="/logo.png" alt="logo" class="w-full max-w-sm mx-auto mt-12 mb-12" />
-  <div class="flex flex-col items-center gap-24">
-    <h2 class="text-5xl font-bold underline"><a href="">Spotify</a></h2>
-    <h2 class="text-5xl font-bold underline"><a href="">Apple music</a></h2>
-    <h2 class="text-5xl font-bold underline"><a href="">YouTube</a></h2>
-    <p class="underline">
-      <a href="https://tamangox3.it">tamangox3.it</a>
-    </p>
-  </div>
-</div>
+<Layout {...page} />
