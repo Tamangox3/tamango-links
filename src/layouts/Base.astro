@@ -5,6 +5,8 @@ import type { Entry } from "@lib/types";
 import Head from "@components/Head.astro";
 import IntroAnimation from "@components/IntroAnimation.astro";
 import Grain from "@components/Grain.astro";
+import Cloudflare from "@components/Cloudflare.astro";
+import ConsoleArt from "@components/ConsoleArt.astro";
 
 interface Props extends Entry<TypePageSkeleton> {}
 
@@ -20,5 +22,7 @@ const page = Astro.props;
       <slot />
       <!-- this is where the page content will be rendered -->
     </main>
+    <ConsoleArt />
+    <Cloudflare />
   </body>
 </html>

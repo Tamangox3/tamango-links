@@ -1,5 +1,11 @@
+---
+const DEV = import.meta.env.DEV;
+console.log(DEV);
+---
+
 <div
   class="intro-animation absolute top-0 bottom-0 left-0 right-0 bg-black flex justify-center items-center"
+  data-dev={DEV.toString()}
 >
   <img src="/intro-animation/frame-0.png" alt="animation frame 1" />
   <img src="/intro-animation/frame-1.png" alt="animation frame 2" />
@@ -9,6 +15,13 @@
 </div>
 
 <script>
+  const DEV =
+    document.querySelector(".intro-animation")!.getAttribute("data-dev") ===
+    "true";
+
+  function log(...args: any[]) {
+    if (DEV) console.log(...args);
+  }
   async function wait(ms: number) {
     return new Promise((res) => setTimeout(res, ms));
   }
@@ -17,7 +30,7 @@
     // fetch the animation frames, all the img tags inside the animation div
     const frames = animation.querySelectorAll("img");
     // wait for the frames to load
-    console.log("waiting for animation frames to load");
+    log("waiting for animation frames to load");
     await Promise.all(
       Array.from(frames).map((frame) => {
         return new Promise<void>((res) => {
@@ -28,7 +41,7 @@
         });
       })
     );
-    console.log("animation frames loaded, starting animation");
+    log("animation frames loaded, starting animation");
     animation.classList.add("intro-animation-animate"); // add the animation class
     // show each frame in order for 250ms
     for (let i = 0; i < frames.length; i++) {
