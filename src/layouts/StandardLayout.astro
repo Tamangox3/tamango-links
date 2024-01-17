@@ -10,15 +10,17 @@ const page = Astro.props;
 ---
 
 <Base {...page}>
-  <div class="fadeInBottom">
+  <div class="fade-in-bottom">
     <img
       src="/logo.svg"
       alt="logo"
       class="w-full max-w-[165px] md:max-w-[280px] mx-auto mt-12 mb-12"
+      width="280"
+      height="123"
     />
   </div>
   <div
-    class="max-w-[400px] overflow-x-hidden text-center mx-auto px-4 fadeInBottom"
+    class="max-w-[400px] overflow-hidden text-center mx-auto px-4 fade-in-bottom"
   >
     <RichText content={page.fields.content} />
   </div>
