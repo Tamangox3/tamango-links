@@ -9,16 +9,33 @@ import Cloudflare from "@components/Cloudflare.astro";
 import ConsoleArt from "@components/ConsoleArt.astro";
 import GoogleAnalytics from "@components/GoogleAnalytics.astro";
 
-interface Props extends Entry<TypePageSkeleton> {}
+interface Props extends Entry<TypePageSkeleton> {
+  grain?: boolean;
+  introAnimation?: boolean;
+  bodyClass?: string;
+}
 
-const page = Astro.props;
+const {
+   fields,
+   metadata,
+   sys,
+   grain = true,
+   introAnimation = true,
+   bodyClass = "bg-black text-white"
+} = Astro.props;
+
+const page = {
+  fields,
+  metadata,
+  sys
+}
 ---
 
 <html lang="it">
   <Head {...page} />
-  <body class="bg-black text-white relative">
-    <Grain />
-    <IntroAnimation />
+  <body class={`relative min-h-screen ${bodyClass}`}>
+    { grain && <Grain />}
+    { introAnimation && <IntroAnimation /> }
     <main>
       <slot />
     </main>

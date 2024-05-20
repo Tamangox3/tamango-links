@@ -24,7 +24,7 @@ export interface TypePageFields {
      * @name Layout
      * @localized false
      */
-    layout: EntryFieldTypes.Symbol<"Pan" | "Standard">;
+    layout: EntryFieldTypes.Symbol<"Cani" | "Pan" | "Standard">;
     /**
      * Field type definition for field 'ogImage' (Immagine SEO)
      * @name Immagine SEO
@@ -69,7 +69,7 @@ export interface TypePageFields {
  * @type {TypePageSkeleton}
  * @author 7oIhVVln1MoQRobu38qPiN
  * @since 2024-01-13T15:44:24.235Z
- * @version 15
+ * @version 17
  */
 export type TypePageSkeleton = EntrySkeletonType<TypePageFields, "page">;
 /**
@@ -78,7 +78,7 @@ export type TypePageSkeleton = EntrySkeletonType<TypePageFields, "page">;
  * @type {TypePage}
  * @author 7oIhVVln1MoQRobu38qPiN
  * @since 2024-01-13T15:44:24.235Z
- * @version 15
+ * @version 17
  */
 export type TypePage<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypePageSkeleton, Modifiers, Locales>;
 
