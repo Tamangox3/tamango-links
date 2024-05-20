@@ -14,8 +14,28 @@
   }
   p {
     font-size: 1.25rem; // 16px
+
+    :hover{
+        transition: all .1s ease-in;
+        opacity: 0.8;
+    }
+
+    p{
+      transition: all .1s ease-in;
+    }
   }
   a {
     text-decoration: underline;
+    cursor: pointer;
+
+    :hover{
+      transition: all .1s ease-in;
+      transform: translateY(-3px);
+    }
+
+    img{
+      transition: all .1s ease-in;
+
+    }
   }
 }
