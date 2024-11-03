@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "https://link.tamangox3.it/*"
+  to = "https://link.tamango.co/:splat"
+  status = 301
+  force = true
