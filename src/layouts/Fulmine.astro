@@ -9,9 +9,9 @@ interface Props extends Entry<TypePageSkeleton> {}
 const page = Astro.props;
 ---
 
-<Base {...page} grain={false} introAnimation={false} bodyClass="text-[color:#000] bg-[url('/img/bg-fulmine.jpg')] flex flex-col justify-center">
+<Base {...page} grain={true} introAnimation={false} bodyClass="fulmine-bg text-white flex flex-col justify-end md:justify-center">
   <div
-    class="max-w-[400px] overflow-hidden text-center mx-auto px-4 fade-in-bottom "
+    class="max-w-[400px] overflow-hidden text-center mx-auto px-4 fade-in-bottom mb-[25px] md:mb-0 md:mt-[50px]"
   >
     <RichText content={page.fields.content} />
   </div>
@@ -25,3 +25,19 @@ const page = Astro.props;
     }
   }, 100);
 </script>
+
+<style is:global>
+  .fulmine-bg {
+    background-image: url('/img/bg-fulmine.jpg');
+    background-size: auto 140%;
+    background-position: center 80%;
+    background-repeat: no-repeat;
+  }
+
+  @media (min-width: 768px) {
+    .fulmine-bg {
+      background-position: center 70%;
+      background-size: cover;
+    }
+  }
+</style>

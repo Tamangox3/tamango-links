@@ -2,9 +2,9 @@
 import contentful from "@lib/contentful";
 import { type TypePageSkeleton } from "@lib/generated/contentful/index";
 import type { Entry } from "@lib/types";
-import Cani from "src/layouts/Cani.astro";
-import Fulmine from "src/layouts/Fulmine.astro";
-import StandardLayout from "src/layouts/StandardLayout.astro";
+import type { AstroComponentFactory } from "astro/runtime/server/index.js";
+
+const layouts = import.meta.glob("../layouts/*.astro");
 
 export async function getStaticPaths() {
   const pages = await contentful.getEntries<TypePageSkeleton>({
@@ -22,21 +22,19 @@ export async function getStaticPaths() {
   });
 }
 
-const getLayout = (page: Entry<TypePageSkeleton>) => {
-  switch (page.fields.layout) {
-    case "Standard":
-      return StandardLayout;
-    case "Fulmine":
-      return Fulmine;
-    case "Cani":
-      return Cani;
-    default:
-      return StandardLayout;
+const getLayout = async (page: Entry<TypePageSkeleton>): Promise<AstroComponentFactory> => {
+  try {
+    return (await layouts[`../layouts/${page.fields.layout}.astro`]() as any).default;
+  } catch (error) {
+    console.error(error);
+    console.log("Layout [" + page.fields.layout + " not found.");
+    console.log("Defaulting to standard layout for page: " + page.fields.slug);
+    return (await layouts["../layouts/StandardLayout.astro"]() as any).default;
   }
 };
 
 const { page } = Astro.props;
-const Layout = getLayout(page);
+const Layout = await getLayout(page);
 ---
 
 <Layout {...page} />
