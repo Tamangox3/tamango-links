@@ -1,0 +1,35 @@
+---
+import type { TypePageSkeleton } from "@lib/generated/contentful";
+import type { Entry } from "@lib/types";
+import Base from "./Base.astro";
+import RichText from "@components/RichText.astro";
+
+interface Props extends Entry<TypePageSkeleton> {}
+
+const page = Astro.props;
+---
+
+<Base {...page} grain={true} introAnimation={false} bodyClass="rampallonata-bg text-white flex flex-col justify-end md:justify-center">
+  <div
+    class="max-w-[400px] overflow-hidden text-center mx-auto px-4 fade-in-bottom md:mb-0"
+  >
+    <RichText content={page.fields.content} />
+  </div>
+</Base>
+
+<script is:inline>
+  const toFade = document.getElementsByClassName('fade-in-bottom');
+  setTimeout(() => {
+    for (let i = 0; i < toFade.length; i++) {
+      toFade[i].classList.add('fade-in-bottom-start');
+    }
+  }, 100);
+</script>
+
+<style is:global>
+  .rampallonata-bg {
+    background-image: url('/img/bg-rampallonata.jpg');
+    background-position: center center;
+    background-repeat:no-repeat;
+  }
+</style>
